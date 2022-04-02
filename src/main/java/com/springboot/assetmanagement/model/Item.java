@@ -16,7 +16,7 @@ public class Item extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 	
-	@JoinColumn(name = "id_item", referencedColumnName = "id")
+	@JoinColumn(name = "id_item_type", referencedColumnName = "id")
 	@ManyToOne
 	private ItemType itemType;
 	

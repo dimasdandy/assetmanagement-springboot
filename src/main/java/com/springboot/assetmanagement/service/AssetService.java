@@ -6,14 +6,8 @@ import com.springboot.assetmanagement.model.Asset;
 
 public interface AssetService {
 
+	List<Asset> getAllAsset() throws Exception;
+	
 	Asset getById(String id) throws Exception;
-
-	//	Long insert(InsertUserReqDto users) throws Exception;
-
-//	void update(UpdateUserReqDto data) throws Exception;
-
-//	void delete(Long id) throws Exception;
-
-//	List<FindAllPathUsersResData> getAll() throws Exception;
 
 }

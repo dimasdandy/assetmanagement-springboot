@@ -20,8 +20,7 @@ public class AssetController {
 	@GetMapping(value = "assets")
 	public ResponseEntity<?> getAllAsset() {
 		try {
-//			return ResponseEntity.ok();
-			return null;
+			return ResponseEntity.ok(assetService.getAllAsset());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

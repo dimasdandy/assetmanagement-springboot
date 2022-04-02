@@ -17,18 +17,24 @@ import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class AuthorizationFilter extends BasicAuthenticationFilter {
 
 	private RestTemplate restTemplate;
+	
+	private ObjectMapper objectMapper;
 
-	public AuthorizationFilter(AuthenticationManager authenticationManager, RestTemplate restTemplate) {
+	public AuthorizationFilter(AuthenticationManager authenticationManager, RestTemplate restTemplate, ObjectMapper objectMapper) {
 		super(authenticationManager);
 		this.restTemplate = restTemplate;
+		this.objectMapper = objectMapper;
 	}
 
 	@Override
@@ -51,6 +57,16 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 		Authentication auth = new UsernamePasswordAuthenticationToken(token, null, null);
 		SecurityContextHolder.getContext().setAuthentication(auth);
 		chain.doFilter(request, response);
+	}
+	
+	@Override
+	protected void onUnsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
+			AuthenticationException failed) throws IOException {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("message", "Whoops something bad happens");
+		response.getWriter().append(objectMapper.writeValueAsString(map));
+		response.setStatus(401);
 	}
 
 }

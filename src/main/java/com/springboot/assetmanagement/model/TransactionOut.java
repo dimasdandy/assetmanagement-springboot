@@ -25,13 +25,11 @@ public class TransactionOut extends BaseEntity {
 	@ManyToOne
 	private Employee employee;
 	
-	@JoinColumn(name = "id_general_item", referencedColumnName = "id")
-	@ManyToOne
-	private Item item;
-	
 	@Column(name = "check_out_date")
 	private Date checkOutDate;
 
+	public TransactionOut() {}
+	
 	public String getCode() {
 		return code;
 	}
@@ -46,14 +44,6 @@ public class TransactionOut extends BaseEntity {
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
-	}
-
-	public Item getItem() {
-		return item;
-	}
-
-	public void setItem(Item item) {
-		this.item = item;
 	}
 
 	public Date getCheckOutDate() {
