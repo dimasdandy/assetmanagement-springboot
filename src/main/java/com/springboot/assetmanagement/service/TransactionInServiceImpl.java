@@ -37,7 +37,7 @@ public class TransactionInServiceImpl implements TransactionInService {
 		} else {
 			throw new ValidationException("transaction in id cannot be null.");
 		}
-		return null;
+		return trxIn;
 	}
 
 	@Override

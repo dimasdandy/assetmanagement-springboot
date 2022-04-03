@@ -27,7 +27,7 @@ public class DetailTransactionInDaoImpl extends BaseDaoImpl implements DetailTra
 		.append("JOIN tbl_items tim ON tim.id = ta.id_item ")
 		.append("JOIN tbl_status_assets tsa ON tsa.id = ta.id_status_asset ")
 		.append("JOIN tbl_invoices ti ON ti.id = ta.id_invoice ")
-		.append("WHERE dti.id_transaction_out = (:trxInId)\\:\\:text ") 
+		.append("WHERE dti.id_transaction_in = (:trxInId)\\:\\:text ") 
 		.append("AND dti.is_active = true ");
 		
 		List<?> list = em.createNativeQuery(sb.toString())
@@ -60,22 +60,5 @@ public class DetailTransactionInDaoImpl extends BaseDaoImpl implements DetailTra
 	public void addTransactionInDetail(DetailTransactionIn detailTransactionIn) throws Exception {
 		em.persist(detailTransactionIn);
 	}
-
-//	@Override
-//	public void insert(Users data) throws Exception {
-//		em.persist(data);
-//	}
-
-//	@Override
-//	public void update(Users data) throws Exception {
-//		em.merge(data);
-//
-//	}
-
-//	@Override
-//	public void delete(Long id) throws Exception {
-//		String sql = "delete from tb_m_users where id =:id";
-//		em.createNativeQuery(sql).setParameter("id", id).executeUpdate();
-//	}
 
 }

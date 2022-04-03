@@ -16,7 +16,7 @@ public class TransactionInDaoImpl extends BaseDaoImpl implements TransactionInDa
 	@Override
 	public List<TransactionInDto> getAllTrxIn() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT tin.id, tin.code, tin.check_in_date, ") 
+		sb.append("SELECT tin.id, tin.code, tin.check_in_date, tin.created_by, ") 
 		.append("tin.created_date, tin.updated_by, tin.updated_date, ") 
 		.append("tin.VERSION, tin.is_active ") 
 		.append("FROM tbl_transactions_in tin ") 
@@ -46,7 +46,7 @@ public class TransactionInDaoImpl extends BaseDaoImpl implements TransactionInDa
 	@Override
 	public TransactionInDto getById(String id) throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT tin.id, tin.code, tin.check_in_date, ") 
+		sb.append("SELECT tin.id, tin.code, tin.check_in_date, tin.created_by, ") 
 		.append("tin.created_date, tin.updated_by, tin.updated_date, ") 
 		.append("tin.VERSION, tin.is_active ") 
 		.append("FROM tbl_transactions_in tin ") 
