@@ -39,5 +39,24 @@ public class ItemDaoImpl extends BaseDaoImpl implements ItemDao {
 		return list.get(0);
 	}
 
+	@Override
+	public void add(Item item) throws Exception {
+		// TODO Auto-generated method stub
+		em.persist(item);
+	}
+
+	@Override
+	public void update(Item item) throws Exception {
+		// TODO Auto-generated method stub
+		em.merge(item);
+	}
+
+	@Override
+	public void delete(String id) throws Exception {
+		// TODO Auto-generated method stub
+		String sql = "DELETE FROM tbl_items item where item.id = :id";
+		em.createNativeQuery(sql).setParameter("id", id).executeUpdate();
+	}
+
 	
 }

@@ -39,5 +39,23 @@ public class StatusAssetDaoImpl extends BaseDaoImpl implements StatusAssetDao {
 		return list.get(0);
 	}
 
+	@Override
+	public void add(StatusAsset statusAsset) throws Exception {
+		// TODO Auto-generated method stub
+		em.persist(statusAsset);
+	}
+
+	@Override
+	public void update(StatusAsset statusAsset) throws Exception {
+		// TODO Auto-generated method stub
+		em.merge(statusAsset);
+	}
+
+	@Override
+	public void delete(String id) throws Exception {
+		// TODO Auto-generated method stub
+		String sql = "DELETE FROM tbl_status_assets statusasset where statusasset.id = :id";
+		em.createNativeQuery(sql).setParameter("id", id).executeUpdate();
+	}
 	
 }

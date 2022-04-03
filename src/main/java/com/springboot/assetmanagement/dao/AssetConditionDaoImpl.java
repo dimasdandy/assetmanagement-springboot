@@ -39,5 +39,21 @@ public class AssetConditionDaoImpl extends BaseDaoImpl implements AssetCondition
 		return list.get(0);
 	}
 
+	@Override
+	public void add(AssetCondition asetCondition) throws Exception {
+		em.persist(asetCondition);
+	}
+
+	@Override
+	public void update(AssetCondition assetCondition) throws Exception {
+		em.merge(assetCondition);
+	}
+
+	@Override
+	public void delete(String id) throws Exception {
+		String sql = "DELETE FROM tbl_asset_condition assetcondition where assetcondition.id = :id";
+		em.createNativeQuery(sql).setParameter("id", id).executeUpdate();		
+	}
+
 	
 }

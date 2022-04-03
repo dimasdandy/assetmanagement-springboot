@@ -37,10 +37,6 @@ public class Asset extends BaseEntity {
 	@ManyToOne
 	private Invoice invoice;
 	
-	@JoinColumn(name = "id_display", referencedColumnName = "id")
-	@ManyToOne
-	private File display;
-	
 	@Column(name = "expired_date")
 	private Date expiredDate;
 
@@ -82,14 +78,6 @@ public class Asset extends BaseEntity {
 
 	public void setInvoice(Invoice invoice) {
 		this.invoice = invoice;
-	}
-
-	public File getDisplay() {
-		return display;
-	}
-
-	public void setDisplay(File display) {
-		this.display = display;
 	}
 
 	public Date getExpiredDate() {

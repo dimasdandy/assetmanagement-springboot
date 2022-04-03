@@ -39,5 +39,24 @@ public class EmployeeDaoImpl extends BaseDaoImpl implements EmployeeDao {
 		return list.get(0);
 	}
 
+	@Override
+	public void add(Employee employee) throws Exception {
+		// TODO Auto-generated method stub
+		em.persist(employee);
+	}
+
+	@Override
+	public void update(Employee employee) throws Exception {
+		// TODO Auto-generated method stub
+		em.merge(employee);
+	}
+
+	@Override
+	public void delete(String id) throws Exception {
+		// TODO Auto-generated method stub
+		String sql = "DELETE FROM tbl_employees where id = :id";
+		em.createNativeQuery(sql).setParameter("id", id).executeUpdate();
+	}
+
 	
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.springboot.assetmanagement.dto.DetailTransactionInDto;
 import com.springboot.assetmanagement.dto.PostDetailTransactionInDto;
-import com.springboot.assetmanagement.dto.PostDetailTransactionOutDto;
 
 public interface DetailTransactionInService {
 

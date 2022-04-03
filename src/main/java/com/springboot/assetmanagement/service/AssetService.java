@@ -10,4 +10,9 @@ public interface AssetService {
 	
 	Asset getById(String id) throws Exception;
 
+	void add(Asset asset) throws Exception;
+
+	void update(Asset asset) throws Exception;
+	
+	void delete(String id) throws Exception;
 }

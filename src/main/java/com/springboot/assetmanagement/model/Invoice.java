@@ -5,8 +5,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -27,10 +25,6 @@ public class Invoice extends BaseEntity {
 	
 	@Column(name = "total_price")
 	private BigDecimal totalPrice;
-	
-	@JoinColumn(name = "id_invoice_pict", referencedColumnName = "id")
-	@ManyToOne
-	private File invoicePict;
 
 	public String getCode() {
 		return code;
@@ -56,12 +50,4 @@ public class Invoice extends BaseEntity {
 		this.totalPrice = totalPrice;
 	}
 
-	public File getInvoicePict() {
-		return invoicePict;
-	}
-
-	public void setInvoicePict(File invoicePict) {
-		this.invoicePict = invoicePict;
-	}
-	
 }

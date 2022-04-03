@@ -10,4 +10,10 @@ public interface EmployeeDao {
 	
 	Employee getById(String id) throws Exception;
 	
+	void add(Employee employee) throws Exception;
+
+	void update(Employee employee) throws Exception;
+	
+	void delete(String id) throws Exception;
+	
 }

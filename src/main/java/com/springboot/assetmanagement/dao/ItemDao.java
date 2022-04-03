@@ -10,4 +10,9 @@ public interface ItemDao {
 	
 	Item getById(String id) throws Exception;
 	
+	void add(Item item) throws Exception;
+
+	void update(Item item) throws Exception;
+	
+	void delete(String id) throws Exception;
 }

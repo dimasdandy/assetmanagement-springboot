@@ -10,4 +10,9 @@ public interface CompanyDao {
 	
 	Company getById(String id) throws Exception;
 	
+	void add(Company company) throws Exception;
+
+	void update(Company company) throws Exception;
+	
+	void delete(String id) throws Exception;
 }

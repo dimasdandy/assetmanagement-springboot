@@ -39,5 +39,21 @@ public class CompanyDaoImpl extends BaseDaoImpl implements CompanyDao {
 		return list.get(0);
 	}
 
+	@Override
+	public void add(Company company) throws Exception {
+		em.persist(company);
+	}
+
+	@Override
+	public void update(Company company) throws Exception {
+		em.merge(company);
+	}
+
+	@Override
+	public void delete(String id) throws Exception {
+		String sql = "DELETE FROM tbl_companies where id = :id";
+		em.createNativeQuery(sql).setParameter("id", id).executeUpdate();
+	}
+
 	
 }

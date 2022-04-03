@@ -39,5 +39,24 @@ public class ItemTypeDaoImpl extends BaseDaoImpl implements ItemTypeDao {
 		return list.get(0);
 	}
 
+	@Override
+	public void add(ItemType itemType) throws Exception {
+		// TODO Auto-generated method stub
+		em.persist(itemType);
+	}
+
+	@Override
+	public void update(ItemType itemType) throws Exception {
+		// TODO Auto-generated method stub
+		em.merge(itemType);
+	}
+
+	@Override
+	public void delete(String id) throws Exception {
+		// TODO Auto-generated method stub
+		String sql = "DELETE FROM tbl_item_types itemtype where itemtype.id = :id";
+		em.createNativeQuery(sql).setParameter("id", id).executeUpdate();
+	}
+
 	
 }

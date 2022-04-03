@@ -39,5 +39,21 @@ public class AssetDaoImpl extends BaseDaoImpl implements AssetDao {
 		return list.get(0);
 	}
 
+	@Override
+	public void add(Asset asset) throws Exception {
+		em.persist(asset);
+	}
+
+	@Override
+	public void update(Asset asset) throws Exception {
+		em.merge(asset);
+	}
+
+	@Override
+	public void delete(String id) throws Exception {
+		String sql = "DELETE FROM tbl_assets asset where asset.id = :id";
+		em.createNativeQuery(sql).setParameter("id", id).executeUpdate();
+	}
+
 	
 }

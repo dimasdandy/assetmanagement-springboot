@@ -39,5 +39,24 @@ public class InvoiceDaoImpl extends BaseDaoImpl implements InvoiceDao {
 		return list.get(0);
 	}
 
+	@Override
+	public void add(Invoice invoice) throws Exception {
+		// TODO Auto-generated method stub
+		em.persist(invoice);
+	}
+
+	@Override
+	public void update(Invoice invoice) throws Exception {
+		// TODO Auto-generated method stub
+		em.merge(invoice);
+	}
+
+	@Override
+	public void delete(String id) throws Exception {
+		// TODO Auto-generated method stub
+		String sql = "DELETE FROM tbl_invoices invoice where invoice.id = :id";
+		em.createNativeQuery(sql).setParameter("id", id).executeUpdate();
+	}
+
 	
 }
