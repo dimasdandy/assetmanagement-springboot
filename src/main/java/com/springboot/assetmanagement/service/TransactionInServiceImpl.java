@@ -15,8 +15,6 @@ import com.springboot.assetmanagement.dto.TransactionInDto;
 import com.springboot.assetmanagement.model.TransactionIn;
 import com.springboot.assetmanagement.model.TransactionOut;
 
-import io.jsonwebtoken.io.IOException;
-
 @Service
 public class TransactionInServiceImpl implements TransactionInService {
 
@@ -72,7 +70,7 @@ public class TransactionInServiceImpl implements TransactionInService {
 				} else {
 					return true;
 				}
-            } catch (IOException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
 		})

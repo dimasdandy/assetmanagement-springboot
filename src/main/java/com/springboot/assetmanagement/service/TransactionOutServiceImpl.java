@@ -15,8 +15,6 @@ import com.springboot.assetmanagement.dto.TransactionOutDto;
 import com.springboot.assetmanagement.model.Employee;
 import com.springboot.assetmanagement.model.TransactionOut;
 
-import io.jsonwebtoken.io.IOException;
-
 @Service
 public class TransactionOutServiceImpl implements TransactionOutService {
 
@@ -73,7 +71,7 @@ public class TransactionOutServiceImpl implements TransactionOutService {
 				} else {
 					return true;
 				}
-            } catch (IOException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
 		})
