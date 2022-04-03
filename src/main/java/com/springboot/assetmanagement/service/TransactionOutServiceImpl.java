@@ -10,12 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springboot.assetmanagement.dao.TransactionOutDao;
-import com.springboot.assetmanagement.dto.PostDetailTransactionOutDto;
 import com.springboot.assetmanagement.dto.PostTransactionOutDto;
 import com.springboot.assetmanagement.dto.TransactionOutDto;
 import com.springboot.assetmanagement.model.Employee;
 import com.springboot.assetmanagement.model.TransactionOut;
 import com.springboot.login.service.BaseServiceImpl;
+
+import io.jsonwebtoken.io.IOException;
 
 @Service
 public class TransactionOutServiceImpl extends BaseServiceImpl implements TransactionOutService {
@@ -49,7 +50,7 @@ public class TransactionOutServiceImpl extends BaseServiceImpl implements Transa
 	}
 
 	@Override
-	@Transactional
+	@Transactional (rollbackOn = RuntimeException.class)
 	public void addTransactionOut(PostTransactionOutDto transactionOutDto) throws Exception {
 		TransactionOut trxOut = new TransactionOut();
 		trxOut.setCode(transactionOutDto.getCode());
@@ -65,10 +66,31 @@ public class TransactionOutServiceImpl extends BaseServiceImpl implements Transa
 		trxOut.setIsActive(true);
 		trxOutDao.addTransactionOut(trxOut);
 		
-		for (PostDetailTransactionOutDto detailTrxOutDto : transactionOutDto.getDetailTransactionOut()) {
-			detailTrxOutDto.setParentTrxId(trxOut.getId());
-			detailTrxOutService.addTransactionOutDetail(detailTrxOutDto);
-		}
+		transactionOutDto.getDetailTransactionOut().stream()
+		.filter(data -> {
+			try {
+				if (data.getAssetId() == null) {
+					throw new RuntimeException("asset id cannot be null.");
+				} else {
+					return true;
+				}
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+		})
+		.forEach(data -> {
+			data.setParentTrxId(trxOut.getId());
+			try {
+				detailTrxOutService.addTransactionOutDetail(data);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		
+//		for (PostDetailTransactionOutDto detailTrxOutDto : transactionOutDto.getDetailTransactionOut()) {
+//			detailTrxOutDto.setParentTrxId(trxOut.getId());
+//			detailTrxOutService.addTransactionOutDetail(detailTrxOutDto);
+//		}
 	}
 	
 }

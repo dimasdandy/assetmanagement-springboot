@@ -10,12 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springboot.assetmanagement.dao.TransactionInDao;
-import com.springboot.assetmanagement.dto.PostDetailTransactionInDto;
 import com.springboot.assetmanagement.dto.PostTransactionInDto;
 import com.springboot.assetmanagement.dto.TransactionInDto;
 import com.springboot.assetmanagement.model.TransactionIn;
 import com.springboot.assetmanagement.model.TransactionOut;
 import com.springboot.login.service.BaseServiceImpl;
+
+import io.jsonwebtoken.io.IOException;
 
 @Service
 public class TransactionInServiceImpl extends BaseServiceImpl implements TransactionInService {
@@ -25,7 +26,7 @@ public class TransactionInServiceImpl extends BaseServiceImpl implements Transac
 	
 	@Autowired
 	private DetailTransactionInService detailTrxInService;
-
+	
 	@Override
 	public List<TransactionInDto> getAllTrxIn() throws Exception {
 		return trxInDao.getAllTrxIn();
@@ -48,7 +49,7 @@ public class TransactionInServiceImpl extends BaseServiceImpl implements Transac
 	}
 
 	@Override
-	@Transactional
+	@Transactional (rollbackOn = RuntimeException.class)
 	public void addTransactionIn(PostTransactionInDto transactionInDto) throws Exception {
 		TransactionIn trxIn = new TransactionIn();
 		trxIn.setCode(transactionInDto.getCode());
@@ -64,12 +65,25 @@ public class TransactionInServiceImpl extends BaseServiceImpl implements Transac
 		trxIn.setIsActive(true);
 		trxInDao.addTransactionIn(trxIn);
 		
-		for (PostDetailTransactionInDto detailTrxInDto : transactionInDto.getDetailTransactionIn()) {
-			detailTrxInDto.setParentTrxId(trxIn.getId());
-			detailTrxInService.addTransactionInDetail(detailTrxInDto);
-		}
+		transactionInDto.getDetailTransactionIn().stream()
+		.filter(data -> {
+			try {
+				if (data.getAssetId() == null) {
+					throw new RuntimeException("asset id cannot be null.");
+				} else {
+					return true;
+				}
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+		})
+		.forEach(data -> {
+			data.setParentTrxId(trxIn.getId());
+			try {
+				detailTrxInService.addTransactionInDetail(data);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
 	}
-	
-	
-	
 }
