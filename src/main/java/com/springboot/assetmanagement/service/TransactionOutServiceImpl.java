@@ -14,12 +14,11 @@ import com.springboot.assetmanagement.dto.PostTransactionOutDto;
 import com.springboot.assetmanagement.dto.TransactionOutDto;
 import com.springboot.assetmanagement.model.Employee;
 import com.springboot.assetmanagement.model.TransactionOut;
-import com.springboot.login.service.BaseServiceImpl;
 
 import io.jsonwebtoken.io.IOException;
 
 @Service
-public class TransactionOutServiceImpl extends BaseServiceImpl implements TransactionOutService {
+public class TransactionOutServiceImpl implements TransactionOutService {
 
 	@Autowired
 	private TransactionOutDao trxOutDao;
@@ -86,11 +85,6 @@ public class TransactionOutServiceImpl extends BaseServiceImpl implements Transa
 				e.printStackTrace();
 			}
 		});
-		
-//		for (PostDetailTransactionOutDto detailTrxOutDto : transactionOutDto.getDetailTransactionOut()) {
-//			detailTrxOutDto.setParentTrxId(trxOut.getId());
-//			detailTrxOutService.addTransactionOutDetail(detailTrxOutDto);
-//		}
 	}
 	
 }

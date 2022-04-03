@@ -12,10 +12,9 @@ import org.springframework.stereotype.Service;
 import com.springboot.assetmanagement.dao.AssetConditionDao;
 import com.springboot.assetmanagement.model.AssetCondition;
 import com.springboot.assetmanagement.model.StatusAsset;
-import com.springboot.login.service.BaseServiceImpl;
 
 @Service
-public class AssetConditionServiceImpl extends BaseServiceImpl implements AssetConditionService {
+public class AssetConditionServiceImpl implements AssetConditionService {
 
 	@Autowired
 	private AssetConditionDao assetConditionDao;

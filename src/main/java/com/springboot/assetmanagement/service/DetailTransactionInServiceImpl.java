@@ -16,10 +16,9 @@ import com.springboot.assetmanagement.model.Asset;
 import com.springboot.assetmanagement.model.AssetCondition;
 import com.springboot.assetmanagement.model.DetailTransactionIn;
 import com.springboot.assetmanagement.model.TransactionIn;
-import com.springboot.login.service.BaseServiceImpl;
 
 @Service
-public class DetailTransactionInServiceImpl extends BaseServiceImpl implements DetailTransactionInService {
+public class DetailTransactionInServiceImpl implements DetailTransactionInService {
 
 	@Autowired
 	private DetailTransactionInDao detailTrxInDao;

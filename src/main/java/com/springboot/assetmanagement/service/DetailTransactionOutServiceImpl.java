@@ -15,10 +15,9 @@ import com.springboot.assetmanagement.dto.PostDetailTransactionOutDto;
 import com.springboot.assetmanagement.model.Asset;
 import com.springboot.assetmanagement.model.DetailTransactionOut;
 import com.springboot.assetmanagement.model.TransactionOut;
-import com.springboot.login.service.BaseServiceImpl;
 
 @Service
-public class DetailTransactionOutServiceImpl extends BaseServiceImpl implements DetailTransactionOutService {
+public class DetailTransactionOutServiceImpl implements DetailTransactionOutService {
 
 	@Autowired
 	private DetailTransactionOutDao detailTrxOutDao;

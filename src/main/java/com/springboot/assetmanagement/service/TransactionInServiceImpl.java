@@ -14,12 +14,11 @@ import com.springboot.assetmanagement.dto.PostTransactionInDto;
 import com.springboot.assetmanagement.dto.TransactionInDto;
 import com.springboot.assetmanagement.model.TransactionIn;
 import com.springboot.assetmanagement.model.TransactionOut;
-import com.springboot.login.service.BaseServiceImpl;
 
 import io.jsonwebtoken.io.IOException;
 
 @Service
-public class TransactionInServiceImpl extends BaseServiceImpl implements TransactionInService {
+public class TransactionInServiceImpl implements TransactionInService {
 
 	@Autowired
 	private TransactionInDao trxInDao;
